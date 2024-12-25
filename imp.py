@@ -1,5 +1,5 @@
 import flet as ft
-from data import make_text
+from data import make_text, make_time_now
 
 def main(page: ft.Page):
     page.title = "App"
@@ -26,6 +26,10 @@ def main(page: ft.Page):
         flag = False
         update_text(e)
 
+    def set_time_now(e):
+        result = make_time_now()
+        viever_texter.value = f"{result}"
+        page.update()
    
     my_text = ft.Text('Enter ur date', color="blue")
     user_text = ft.TextField(
@@ -39,6 +43,7 @@ def main(page: ft.Page):
 
     button_true = ft.IconButton(ft.Icons.RECYCLING, on_click=set_flag_true)  
     button_false = ft.IconButton(ft.Icons.MUSIC_NOTE, on_click=set_flag_false)  
+    button_time_now = ft.IconButton(ft.Icons.WATCH_LATER_OUTLINED, on_click = set_time_now)
 
     viever_texter = ft.Text("Just your future date", color='blue')
 
@@ -49,7 +54,7 @@ def main(page: ft.Page):
                 alignment=ft.MainAxisAlignment.CENTER
             ),
             ft.Row(
-                [my_text, user_text, button_true, button_false],
+                [my_text, user_text, button_true, button_false,button_time_now],
                 alignment=ft.MainAxisAlignment.CENTER
             )
         ], spacing=20)

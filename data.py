@@ -4,14 +4,20 @@ import os
 import pygame
 import queue
 import time
-
+from datetime import datetime 
 base_folder = "D:/Download/MCuc/лаб2"
 
 sys.stdout.reconfigure(encoding='utf-8')
 
-pygame.init()  # Инициализация pygame
+pygame.init()  
 
-
+def make_time_now():
+    now = datetime.now()
+    formatted_time = now.strftime("%I.%M %p %m/%d/%Y")
+    print(formatted_time)
+    result = false_flag(formatted_time)
+    
+    return result
 
 def spliter(text):
     parts = text.split(" ")
@@ -94,7 +100,7 @@ def make_text(text, flag):
 
 def make_noise(text):
     print(f"Обрабатываем текст: {text}")
-    words = text.lower().strip().split()  # Привести текст к нижнему регистру и разделить
+    words = text.lower().strip().split()  
     print(f"Слова для обработки: {words}")
     audio_queue = queue.Queue()
 
@@ -119,14 +125,14 @@ def make_noise(text):
                         word_found = True
                     else:
                         print(f"Аудиофайл {audio_path} не найден.")
-                    break  # Перейти к следующему слову, если найдено
+                    break  
 
             if word_found:
                 break
 
         if not word_found:
             print(f"Слово '{word}' не найдено в словарях.")
-            return  # Завершить выполнение при отсутствии совпадения
+            return  
 
     print("Фраза готова. Начинаем воспроизведение.")
     while not audio_queue.empty():
